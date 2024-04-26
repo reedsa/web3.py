@@ -1,5 +1,6 @@
 import collections
 import hashlib
+import logging
 import threading
 from typing import (
     TYPE_CHECKING,
@@ -134,9 +135,15 @@ def async_handle_request_caching(
         [ASYNC_PROVIDER_TYPE, "RPCEndpoint", Any], Coroutine[Any, Any, "RPCResponse"]
     ],
 ) -> Callable[..., Coroutine[Any, Any, "RPCResponse"]]:
+    logger = logging.getLogger(__name__)
+
     async def wrapper(
         provider: ASYNC_PROVIDER_TYPE, method: "RPCEndpoint", params: Any
     ) -> "RPCResponse":
+
+        logger.debug(f"provider {provider}")
+        logger.debug(f"method {method}")
+        logger.debug(f"params {params}")
         if is_cacheable_request(provider, method):
             request_cache = provider._request_cache
             cache_key = generate_cache_key(
@@ -144,14 +151,17 @@ def async_handle_request_caching(
             )
             cache_result = request_cache.get_cache_entry(cache_key)
             if cache_result is not None:
+                logger.debug(f"cacheres? {cache_result}")
                 return cache_result
             else:
                 response = await func(provider, method, params)
+                logger.debug(f"cache? {response}")
                 if _should_cache_response(response):
                     async with provider._request_cache_lock:
                         request_cache.cache(cache_key, response)
                 return response
         else:
+            logger.debug(f"calling")
             return await func(provider, method, params)
 
     # save a reference to the decorator on the wrapped function

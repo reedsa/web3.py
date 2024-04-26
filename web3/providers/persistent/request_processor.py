@@ -243,7 +243,7 @@ class RequestProcessor:
     ) -> Any:
         if subscription:
             qsize = self._subscription_response_queue.qsize()
-            raw_response = await self._subscription_response_queue.get()
+            raw_response = await self._subscription_response_queue.get(False)
 
             if not self._provider._listen_event.is_set():
                 self._provider._listen_event.set()

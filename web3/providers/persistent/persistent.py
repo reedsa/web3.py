@@ -101,7 +101,7 @@ class PersistentConnectionProvider(AsyncJSONBaseProvider, ABC):
         except asyncio.TimeoutError:
             raise TimeExhausted(
                 f"Timed out waiting for response with request id `{request_id}` after "
-                f"{self.request_timeout} second(s). This may be due to the provider "
+                f"{timeout} second(s). This may be due to the provider "
                 "not returning a response with the same id that was sent in the "
                 "request or an exception raised during the request was caught and "
                 "allowed to continue."

@@ -167,12 +167,12 @@ class WebSocketProvider(PersistentConnectionProvider):
                 "Connection to websocket has not been initiated for the provider."
             )
 
-        await asyncio.wait_for(
-            self._ws.send(request_data), timeout=self.request_timeout
-        )
+        await asyncio.wait_for(self._ws.send(request_data), timeout=5)
 
         current_request_id = json.loads(request_data)["id"]
-        response = await self._get_response_for_request_id(current_request_id)
+        response = await self._get_response_for_request_id(
+            current_request_id, timeout=5
+        )
 
         return response
 

@@ -21,6 +21,7 @@ extras_require = {
         "hypothesis>=3.31.2",
         "pre-commit>=3.4.0",
         "pytest-asyncio>=0.18.1,<0.23",
+        "pytest-flakefinder>=1.1.0",
         "pytest-mock>=1.10",
         "pytest-watch>=4.2",
         "pytest-xdist>=1.29",

@@ -234,6 +234,7 @@ class AsyncEthModuleTest:
         assert modified_txn["gas"] == 21000
         assert modified_txn["gasPrice"] == cast(int, txn_params["gasPrice"]) * 2
 
+    @flaky_geth_dev_mining
     @pytest.mark.asyncio
     async def test_eth_modify_transaction(
         self,
