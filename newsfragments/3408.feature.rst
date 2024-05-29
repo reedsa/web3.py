@@ -1,0 +1,4 @@
+Utilities to extract function ``ABI`` attributes from a contract.
+
+* ``get_abi_element_info`` returns an ``ABIElementInfo`` TypedDict with the ``abi``, ``selector``, and ``arguments``.
+* ``get_abi_element`` returns the ``ABI`` of a function, event, or error given the name and arguments.
