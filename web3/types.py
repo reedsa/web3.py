@@ -488,7 +488,12 @@ TContractFn = TypeVar("TContractFn", "ContractFunction", "AsyncContractFunction"
 # Tracing types
 BlockTrace = NewType("BlockTrace", Dict[str, Any])
 FilterTrace = NewType("FilterTrace", Dict[str, Any])
+TransactionTrace = NewType("TransactionTrace", Dict[str, Any])
 TraceMode = Sequence[Literal["trace", "vmTrace", "stateDiff"]]
+
+
+class TraceTransactionParams(TypedDict, total=False):
+    tracer: str
 
 
 class TraceFilterParams(TypedDict, total=False):

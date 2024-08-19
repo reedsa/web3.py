@@ -673,6 +673,13 @@ common_tracing_result_formatter = type_aware_apply_formatters_to_dict(
     }
 )
 
+geth_tracing_result_formatter = type_aware_apply_formatters_to_dict(
+    {
+        "balance": HexBytes,
+        "nonce": int,
+    }
+)
+
 
 # -- eth_subscribe -- #
 def subscription_formatter(value: Any) -> Union[HexBytes, HexStr, Dict[str, Any]]:
@@ -798,7 +805,7 @@ PYTHONIC_RESULT_FORMATTERS: Dict[RPCEndpoint, Callable[..., Any]] = {
     # tracing
     RPC.trace_block: trace_list_result_formatter,
     RPC.trace_call: common_tracing_result_formatter,
-    RPC.trace_transaction: trace_list_result_formatter,
+    RPC.trace_transaction: geth_tracing_result_formatter,
     RPC.trace_rawTransaction: common_tracing_result_formatter,
     RPC.trace_replayTransaction: common_tracing_result_formatter,
     RPC.trace_replayBlockTransactions: apply_formatter_to_array(

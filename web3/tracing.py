@@ -32,6 +32,8 @@ from web3.types import (
     FilterTrace,
     TraceFilterParams,
     TraceMode,
+    TraceTransactionParams,
+    TransactionTrace,
     TxParams,
     _Hash32,
 )
@@ -78,7 +80,9 @@ class Tracing(Module):
         mungers=[default_root_munger],
     )
 
-    trace_transaction: Method[Callable[[_Hash32], List[FilterTrace]]] = Method(
+    trace_transaction: Method[
+        Callable[[_Hash32, TraceTransactionParams], TransactionTrace]
+    ] = Method(
         RPC.trace_transaction,
         mungers=[default_root_munger],
     )

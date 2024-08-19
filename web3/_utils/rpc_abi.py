@@ -130,7 +130,7 @@ class RPC:
     trace_rawTransaction = RPCEndpoint("trace_rawTransaction")
     trace_replayBlockTransactions = RPCEndpoint("trace_replayBlockTransactions")
     trace_replayTransaction = RPCEndpoint("trace_replayTransaction")
-    trace_transaction = RPCEndpoint("trace_transaction")
+    trace_transaction = RPCEndpoint("debug_traceTransaction")
 
     # txpool
     txpool_content = RPCEndpoint("txpool_content")
