@@ -250,7 +250,13 @@ def get_event_data(
     log_data_normalized_inputs = normalize_event_input_types(log_data_abi)
     log_data_types = get_event_abi_types_for_decoding(log_data_normalized_inputs)
     log_data_names = get_abi_input_names(
-        ABIEvent({"name": event_abi["name"], "type": "event", "inputs": log_data_abi})
+        ABIEvent(
+            {
+                "name": event_abi["name"],
+                "type": "event",
+                "inputs": cast(Sequence[ABIComponentIndexed], log_data_abi),
+            }
+        )
     )
 
     # sanity check that there are not name intersections between the topic
